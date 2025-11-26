@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleApp1
+﻿namespace SelectAgeCategory
 {
-    internal class Task2
+    internal class Program
     {
-        public static void SelectAgeCategory()
-        {   
-                Console.WriteLine("enter your age");
+        static void Main(string[] args)
+        {
+            Console.WriteLine("enter your age");
             int age;
             while (true)
             {
@@ -20,23 +14,24 @@ namespace ConsoleApp1
                     Console.WriteLine("enter your age");
                     continue;
                 }
-                if (!int.TryParse(input,out  age))
+                if (!int.TryParse(input, out age))
                 {
                     Console.WriteLine("Please enter a number");
                     continue;
                 }
-                if (age > 125 || age <0 )
+                if (age > 125 || age < 0)
                 {
                     Console.WriteLine("Error: Age must be between 0 and 125 .Please try again");
                     continue;
                 }
                 break;
-                
+
             }
-            if (age > 0 && age <= 10){
+            if (age > 0 && age <= 10)
+            {
                 Console.WriteLine("You are Child");
             }
-            else if (age>10 && age < 18)
+            else if (age > 10 && age < 18)
             {
                 Console.WriteLine("You are teenager");
             }
@@ -44,7 +39,6 @@ namespace ConsoleApp1
             {
                 Console.WriteLine("You are adult");
             }
-
         }
     }
 }

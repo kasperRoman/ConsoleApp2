@@ -3,4 +3,5 @@
     <File Path=".gitignore" />
   </Folder>
   <Project Path="ConsoleApp1/ConsoleApp1.csproj" />
+  <Project Path="TaskAge/TaskAge.csproj" Id="043fb7b3-693b-41ca-ab00-18cfae775f20" />
 </Solution>
