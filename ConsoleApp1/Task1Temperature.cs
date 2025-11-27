@@ -31,8 +31,12 @@ namespace ConsoleApp1
 
                 break;
             }
-            double fahrenheit = (celsius * 9 / 5) + 32;
-            Console.WriteLine($"celsius:{celsius}°C= fahrenheit{fahrenheit}°F");
+    
+            Console.WriteLine($"celsius:{celsius}°C= fahrenheit{Convert(celsius)}°F");
+        }
+        public static double Convert(double celsius)
+        {
+            return (celsius * 9 / 5) + 32;
         }
     }
 }
