@@ -10,10 +10,11 @@ namespace ConsoleApp1
     {
         public static void RunSumRange()
         {
+            Console.Clear();
             int start = ReadNumber("Enter the start of the range:");
             int end = ReadNumber("Enter the end of the range:");
             int sum = CalculateSum(start, end);
-            Console.WriteLine($"Sum from {start} to {end} = {sum}");
+            Console.WriteLine($"\nSum from {start} to {end} = {sum}");
         }
         private static int ReadNumber(string prompt)
         {

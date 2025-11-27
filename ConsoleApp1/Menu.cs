@@ -19,9 +19,9 @@ namespace ConsoleApp1
                 Console.WriteLine("3. Multiplication Table ");
                 Console.WriteLine("4. Sum numbers in a range ");
                 Console.WriteLine("5. Book list ");
-                Console.WriteLine("6.Min number ");
-                Console.WriteLine("7.Calculator ");
-                Console.WriteLine("8.list Student ");
+                Console.WriteLine("6. Min number ");
+                Console.WriteLine("7. Calculator ");
+                Console.WriteLine("8. list Student ");
                 Console.WriteLine("0. Exit");
                 Console.Write("Select option: ");
                 string? input = Console.ReadLine(); 

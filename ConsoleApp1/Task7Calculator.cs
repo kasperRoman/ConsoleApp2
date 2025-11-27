@@ -11,10 +11,10 @@ namespace ConsoleApp1
     {
         public static void RunCalculator()
         {
-            Calculator calc = new Calculator();
 
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("\n=== Calculator ===");
                 Console.WriteLine("1. Addition (+)");
                 Console.WriteLine("2. Subtraction (-)");
@@ -27,12 +27,16 @@ namespace ConsoleApp1
                 if (string.IsNullOrWhiteSpace(choice))
                 {
                     Console.WriteLine("Error: Empty input.");
+                    Console.WriteLine("Press Enter to continue...");
+                    Console.ReadLine();
                     continue;
                 }
                 string[] validChoices = { "1", "2", "3", "4", "5" };
                 if (!validChoices.Contains(choice))
                 {
                     Console.WriteLine("Error: Invalid choice.");
+                    Console.WriteLine("Press Enter to continue...");
+                    Console.ReadLine();
                     continue;
                 }
 
@@ -40,18 +44,15 @@ namespace ConsoleApp1
                 if (choice == "5")
                     break;
 
-
-                double a = ReadDouble("Enter the first number: "); 
+                double a = ReadDouble("Enter the first number: ");
                 double b = ReadDouble("Enter the second number: ");
-
-  
 
                 double result = choice switch
                 {
-                    "1" => calc.Add(a, b),
-                    "2" => calc.Subtract(a, b),
-                    "3" => calc.Multiply(a, b),
-                    "4" => calc.Divide(a, b),
+                    "1" => Calculator.Add(a, b),
+                    "2" => Calculator.Subtract(a, b),
+                    "3" => Calculator.Multiply(a, b),
+                    "4" => Calculator.Divide(a, b),
                     _ => double.NaN
                 };
 
@@ -59,6 +60,8 @@ namespace ConsoleApp1
                     Console.WriteLine(" Calculation error.");
                 else
                     Console.WriteLine($" Result: {result}");
+                Console.WriteLine("Press Enter to continue...");
+                Console.ReadLine();
 
             }
         }
@@ -66,7 +69,7 @@ namespace ConsoleApp1
         {
             while (true)
             {
-                Console.Write(prompt);  
+                Console.Write(prompt);
                 string? input = Console.ReadLine()?.Trim();
                 if (string.IsNullOrWhiteSpace(input) || !double.TryParse(input, out double number))
                 {

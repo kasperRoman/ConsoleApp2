@@ -8,7 +8,8 @@ namespace ConsoleApp1
 {
     internal class Task5BookList
     {
-        public static void ShowList() {    
+        public static void ShowList() {  
+            Console.Clear();
             Console.WriteLine("Book List:");
 
             Book book1 = new Book("1984", "George Orwell", 1949);

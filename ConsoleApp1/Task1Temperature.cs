@@ -9,7 +9,8 @@ namespace ConsoleApp1
     internal class Task1Temperature
     {
         public static void ConvertCelsiusToFahrenheit()
-        {
+        {    
+            Console.Clear();
             Console.WriteLine("Task 1: Celsius to Fahrenheit");
             double celsius;
             Console.WriteLine("Enter the temperature in degrees Celsius");
@@ -26,13 +27,11 @@ namespace ConsoleApp1
                     Console.WriteLine("Error: Invalid input. Please enter a numeric value.");
                     continue;
                 }
-
-
-
                 break;
             }
     
-            Console.WriteLine($"celsius:{celsius}°C= fahrenheit{Convert(celsius)}°F");
+            Console.WriteLine($"\n celsius:{celsius}°C= fahrenheit{Convert(celsius)}°F");
+
         }
         public static double Convert(double celsius)
         {

@@ -10,6 +10,7 @@ namespace ConsoleApp1
     {
         public static void Show()
         {
+            Console.Clear();
             int number = ReadNumber();
             PrintTable(number);
         }
