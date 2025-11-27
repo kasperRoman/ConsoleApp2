@@ -11,6 +11,7 @@ namespace ConsoleApp1
         public static void ShowMultiplicationTable()
         {
             Console.WriteLine("enter a number ");
+
             while (true)
             {
                 string? input = Console.ReadLine();
