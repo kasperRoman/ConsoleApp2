@@ -21,6 +21,7 @@ namespace ConsoleApp1
                 Console.WriteLine("5. Book list ");
                 Console.WriteLine("6.Min number ");
                 Console.WriteLine("7.Calculator ");
+                Console.WriteLine("8.list Student ");
                 Console.WriteLine("0. Exit");
                 Console.Write("Select option: ");
                 string? input = Console.ReadLine(); 
@@ -33,6 +34,7 @@ namespace ConsoleApp1
                     case "5": Task5BookList.ShowList(); Pause(); break;
                     case "6": Task6MinNumber.MinNumber(); Pause(); break;
                     case "7": Task7Calculator.RunCalculator(); Pause(); break;
+                    case "8": Task8Student.Run(); Pause(); break;
                     case "0": Console.WriteLine("Goodbye!"); return;
                     default: Console.WriteLine("Invalid option."); Pause(); break;
                 }
