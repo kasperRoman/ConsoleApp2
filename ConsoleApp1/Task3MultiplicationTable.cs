@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShowTable
+namespace ConsoleApp1
 {
-    public static  class MultiplicationTable
+    internal class Task3MultiplicationTable
     {
         public static void Show()
         {
             int number = ReadNumber();
             PrintTable(number);
         }
-        private static int  ReadNumber()
+        private static int ReadNumber()
         {
             while (true)
             {
@@ -24,7 +24,7 @@ namespace ShowTable
                     Console.WriteLine("Input cannot be empty. Please enter a valid number.");
                     continue;
                 }
-                if (!int .TryParse(input, out int number))
+                if (!int.TryParse(input, out int number))
                 {
                     Console.WriteLine("Invalid input. Please enter a valid integer.");
                     continue;
@@ -39,7 +39,7 @@ namespace ShowTable
             {
                 int result = number * i;
                 Console.WriteLine($"{number} x {i} = {result}");
-                
+
             }
         }
     }

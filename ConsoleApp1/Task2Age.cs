@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskAge
+namespace ConsoleApp1
 {
-    internal class AgeChecker
+    internal class Task2Age
     {
         public static void RunAgeCheck()
         {

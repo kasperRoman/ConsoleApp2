@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    internal class Task6
+    internal class Task6MinNumber
     {
         public static void MinNumber()
         {

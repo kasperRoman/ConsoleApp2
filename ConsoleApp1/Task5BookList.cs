@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    internal class Task5
+    internal class Task5BookList
     {
-        public static void BoocList() {    
+        public static void ShowList() {    
             Console.WriteLine("Book List:");
 
             Book book1 = new Book("1984", "George Orwell", 1949);

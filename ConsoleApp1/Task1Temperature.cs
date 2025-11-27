@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    internal class Task1
+    internal class Task1Temperature
     {
         public static void ConvertCelsiusToFahrenheit()
         {
@@ -16,7 +16,7 @@ namespace ConsoleApp1
             while (true)
             {
                 string? inputCelsius = Console.ReadLine();
-                if (string.IsNullOrEmpty(inputCelsius))
+                if (string.IsNullOrWhiteSpace(inputCelsius))
                 {
                     Console.WriteLine("Error: Empty input. Please enter a value.");
                     continue;
