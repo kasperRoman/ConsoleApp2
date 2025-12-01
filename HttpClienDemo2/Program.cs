@@ -1,10 +1,9 @@
-﻿using HttpClienDemo2;
-using HttpClientDemo2;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using HttpClientDemo2;
 
 namespace HttpClientDemo2
 {
@@ -19,11 +18,21 @@ namespace HttpClientDemo2
                 .Build();
 
             string? apiKey = config["OpenWeatherMap:ApiKey"];
+            string? baseUrl = config["OpenWeatherMap:BaseUrl"];
+            string? timeoutStr = config["OpenWeatherMap:TimeoutSeconds"];
+
             if (string.IsNullOrWhiteSpace(apiKey))
             {
                 Console.WriteLine("API ключ не знайдено.");
                 return;
             }
+
+            if (!int.TryParse(timeoutStr, out int timeoutSeconds))
+            {
+                timeoutSeconds = 10; 
+            }
+
+            client.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
 
             Console.Write("Введіть назву міста: ");
             string? city = Console.ReadLine();
@@ -34,7 +43,7 @@ namespace HttpClientDemo2
                 return;
             }
 
-            string url = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}&units=metric&lang=ua";
+            string url = $"{baseUrl}?q={city}&appid={apiKey}&units=metric&lang=ua";
 
             try
             {
@@ -59,9 +68,11 @@ namespace HttpClientDemo2
                     return;
                 }
 
-                Console.WriteLine($"Місто: {weather.Name}");
-                Console.WriteLine($"Температура: {weather.Main.Temp}°C");
-                Console.WriteLine($"Погода: {weather.Weather[0].Description}");
+                Console.WriteLine($"🌍 Місто: {weather.Name}, Країна: {weather.Country}");
+                Console.WriteLine($"🌡️ Температура: {weather.Main.Temp}°C");
+                Console.WriteLine($"💧 Вологість: {weather.Main.Humidity}%");
+                Console.WriteLine($"🌬️ Вітер: {weather.Wind?.Speed} м/с");
+                Console.WriteLine($"☁️ Погода: {weather.Weather[0].Description}");
             }
             catch (HttpRequestException ex)
             {
