@@ -10,17 +10,18 @@ namespace HttpClientDemo2
 {
     internal class Program
     {
+        // Загальний HttpClient — можна залишити, але у майбутньому поміняємо на IHttpClientFactory
         static readonly HttpClient client = new HttpClient();
         static ILogger<Program>? logger;
 
         static async Task Main(string[] args)
         {
-            // 🔧 Конфігурація
+            // --- Конфігурація ---
             var config = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            // 🔧 Логер
+            // --- Логер ---
             using var loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder.AddConsole();
@@ -45,24 +46,35 @@ namespace HttpClientDemo2
 
             client.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
 
-            // 🔧 Ввід міста
+            // --- Ввід міста ---
             Console.Write("Введіть назву міста: ");
-            string? city = Console.ReadLine();
+            string? cityInput = Console.ReadLine();
 
-            if (string.IsNullOrWhiteSpace(city))
+            if (string.IsNullOrWhiteSpace(cityInput))
             {
                 logger.LogWarning("⚠️ Місто не введено.");
                 return;
             }
 
-            string url = $"{baseUrl}?q={city}&appid={apiKey}&units=metric&lang=ua";
+            // --- Крок 1: ескейпим введення (щоб безпечно вставити у query) ---
+            string cityEscaped = Uri.EscapeDataString(cityInput.Trim());
+
+            // --- Крок 1: будуємо URL без ручного конкатенування ---
+            // Якщо baseUrl вже містить query — краще парсити, але зазвичай це базовий ендпойнт без query
+            var uriBuilder = new UriBuilder(baseUrl);
+            
+            var query = $"q={cityEscaped}&appid={Uri.EscapeDataString(apiKey)}&units=metric&lang=ua";
+            uriBuilder.Query = query;
+            string url = uriBuilder.Uri.ToString();
+
             logger.LogInformation($"🔍 Запит погоди: {url}");
 
             try
             {
-                HttpResponseMessage response = await client.GetAsync(url);
+                // Використовуємо using — щоб явно звільнити HttpResponseMessage після читання
+                using HttpResponseMessage response = await client.GetAsync(url);
 
-                // 🔍 Повний контроль над статусами
+                // --- Повний контроль над статусами (як у тебе було) ---
                 switch (response.StatusCode)
                 {
                     case HttpStatusCode.Unauthorized:
@@ -90,7 +102,7 @@ namespace HttpClientDemo2
                         break;
                 }
 
-                // 🔧 Обробка JSON тільки при успішному статусі
+                // Читаємо тіло і десеріалізуємо
                 string json = await response.Content.ReadAsStringAsync();
                 var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 WeatherResponse? weather = JsonSerializer.Deserialize<WeatherResponse>(json, options);
@@ -109,10 +121,12 @@ namespace HttpClientDemo2
             }
             catch (HttpRequestException ex)
             {
+                // HttpRequestException трапляється при проблемах мережі або після EnsureSuccessStatusCode()
                 logger.LogError(ex, "❌ Помилка запиту. Перевірте ключ або підключення до інтернету.");
             }
             catch (JsonException jex)
             {
+                // JsonException — помилка десеріалізації
                 logger.LogError(jex, "❌ Помилка при обробці JSON.");
             }
         }
