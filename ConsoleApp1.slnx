@@ -3,4 +3,7 @@
     <File Path=".gitignore" />
   </Folder>
   <Project Path="ConsoleApp1/ConsoleApp1.csproj" />
+  <Project Path="ConsoleLibrary/ConsoleLibrary.csproj" Id="107e09b3-31b3-4985-88b2-6437b6d51625" />
+  <Project Path="HttpClienDemo2/HttpClienDemo2.csproj" Id="23e2fd9f-1649-4329-ae2f-8033d262e407" />
+  <Project Path="HttpClientDemo/HttpClientDemo.csproj" Id="21bd7dab-7aa0-49c0-b6c6-3097079a7bb1" />
 </Solution>
